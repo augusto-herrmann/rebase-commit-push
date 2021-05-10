@@ -45,12 +45,12 @@ git add -A
 
 echo 'Committing'
 if [ -n "${INPUT_COAUTHOR_EMAIL}" ] && [ -n "${INPUT_COAUTHOR_NAME}" ]; then
-    git commit -m "${INPUT_MESSAGE}" || true
+    git commit -m "${INPUT_MESSAGE}
 
 
-Co-authored-by: ${INPUT_COAUTHOR_NAME} <${INPUT_COAUTHOR_EMAIL}>" $_EMPTY || exit 0
+Co-authored-by: ${INPUT_COAUTHOR_NAME} <${INPUT_COAUTHOR_EMAIL}>" $_EMPTY || true
 else
-    git commit -m "{$INPUT_MESSAGE}" $_EMPTY || exit 0
+    git commit -m "{$INPUT_MESSAGE}" $_EMPTY || true
 fi
 echo 'Comitted'
 
