@@ -1,4 +1,6 @@
-# GitHub Action for GitHub Commit & Push
+# GitHub Action for GitHub Commit & Push (with Rebase!)
+
+This fork differs by adding support for the `rebase` flag.
 
 The GitHub Actions for commiting & pushing to GitHub repository local changes authorizing using GitHub token.
 
@@ -19,24 +21,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-      with:
-        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
-        fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+    - uses: actions/checkout@v2
     - name: Create local changes
       run: |
         ...
     - name: Commit & Push changes
       uses: actions-js/push@master
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        rebase: true
 ```
 
 ### Inputs
 
 | name           | value   | default                     | description |
 | -------------- | ------  | --------------------------- | ----------- |
-| github_token   | string  |                             | Token for the repo. Can be passed in using `${{ secrets.GITHUB_TOKEN }}`. |
 | author_email   | string  | 'github-actions[bot]@users.noreply.github.com' | Email used to configure user.email in `git config`. |
 | author_name    | string  | 'github-actions[bot]'       | Name used to configure user.name in `git config`. |
 | coauthor_email | string  |                             | Email used to make a co-authored commit. |
@@ -45,17 +43,18 @@ jobs:
 | branch         | string  | 'master'                    | Destination branch to push changes. |
 | empty          | boolean | false                       | Allow empty commit. |
 | force          | boolean | false                       | Determines if force push is used. |
+| rebase         | boolean | false                       | Determines if a rebase should be performed before pushing. |
 | tags           | boolean | false                       | Determines if `--tags` is used. |
 | directory      | string  | '.'                         | Directory to change to before pushing. |
 | repository     | string  | ''                          | Repository name. Default or empty repository name represents current github repository. If you want to push to other repository, you should make a [personal access token](https://github.com/settings/tokens) and use it as the `github_token` input.  |
 
 ## License
 
-The Dockerfile and associated scripts and documentation in this project are released under the [MIT License](LICENSE).
+[MIT License](LICENSE).
 
 ## Credits
 
-This is a slight modification of the [ad-m/github-push-action](https://github.com/ad-m/github-push-action) action.
+This is a slight modification [actions-js/push](https://github.com/actions-js/push) which is a slight modification of [ad-m/github-push-action](https://github.com/ad-m/github-push-action).
 
 ## No affiliation with GitHub Inc.
 
