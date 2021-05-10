@@ -43,7 +43,7 @@ jobs:
 | branch         | string  | 'master'                    | Destination branch to push changes. |
 | empty          | boolean | false                       | Allow empty commit. |
 | force          | boolean | false                       | Determines if force push is used. |
-| rebase         | boolean | false                       | Determines if a rebase should be performed before pushing. |
+| rebase         | boolean | true                        | Determines if a rebase should be performed before pushing. |
 | tags           | boolean | false                       | Determines if `--tags` is used. |
 | directory      | string  | '.'                         | Directory to change to before pushing. |
 | repository     | string  | ''                          | Repository name. Default or empty repository name represents current github repository. If you want to push to other repository, you should make a [personal access token](https://github.com/settings/tokens) and use it as the `github_token` input.  |

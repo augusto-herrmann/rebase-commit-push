@@ -1,4 +1,4 @@
-name: 'GitHub Commit & Push'
+name: 'GitHub Commit & Push with Rebase'
 description: 'Push changes made by actions right back into the current repository.'
 author: "actions-js"
 inputs:
@@ -56,7 +56,6 @@ runs:
         INPUT_COAUTHOR_EMAIL: ${{ inputs.coauthor_email }}
         INPUT_COAUTHOR_NAME: ${{ inputs.coauthor_name }}
         INPUT_MESSAGE: ${{ inputs.message }}
-        INPUT_REPOSITORY: ${{ inputs.repository }}
         INPUT_EMPTY: ${{ inputs.empty }}
         INPUT_FORCE: ${{ inputs.force }}
         INPUT_REBASE: ${{ inputs.rebase }}
