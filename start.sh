@@ -3,8 +3,6 @@ set -e
 
 timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
-export;
-
 INPUT_AUTHOR_EMAIL=${INPUT_AUTHOR_EMAIL:-'github-actions[bot]@users.noreply.github.com'}
 INPUT_AUTHOR_NAME=${INPUT_AUTHOR_NAME:-'github-actions[bot]'}
 INPUT_COAUTHOR_EMAIL=${INPUT_COAUTHOR_EMAIL:-''}
