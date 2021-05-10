@@ -53,6 +53,19 @@ runs:
   steps:
     - run: ${{ github.action_path }}/start.sh
       shell: bash
+      env:
+        INPUT_GITHUB_TOKEN: ${{ inputs.github_token }}
+        INPUT_AUTHOR_EMAIL: ${{ inputs.author_email }}
+        INPUT_AUTHOR_NAME: ${{ inputs.author_name }}
+        INPUT_COAUTHOR_EMAIL: ${{ inputs.coauthor_email }}
+        INPUT_COAUTHOR_NAME: ${{ inputs.coauthor_name }}
+        INPUT_MESSAGE: ${{ inputs.message }}
+        INPUT_REPOSITORY: ${{ inputs.repository }}
+        INPUT_EMPTY: ${{ inputs.empty }}
+        INPUT_FORCE: ${{ inputs.force }}
+        INPUT_REBASE: ${{ inputs.rebase }}
+        INPUT_TAGS: ${{ inputs.tags }}
+        INPUT_DIRECTORY: ${{ inputs.directory }}
 branding:
   icon: 'arrow-up-circle'
   color: 'green'
