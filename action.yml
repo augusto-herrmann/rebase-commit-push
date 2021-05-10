@@ -24,10 +24,6 @@ inputs:
   message:
     description: 'Commit message.'
     required: false
-  repository:
-    description: 'Repository name to push. Default or empty value represents current github repository (${GITHUB_REPOSITORY})'
-    default: ''
-    required: false
   branch:
     description: 'Destination branch to push changes'
     required: false
