@@ -26,7 +26,7 @@ jobs:
       run: |
         ...
     - name: Commit & Push changes
-      uses: actions-js/push@master
+      uses: actions-js/push@v1.1
       with:
         rebase: true
 ```
