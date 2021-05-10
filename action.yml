@@ -2,17 +2,19 @@ name: 'GitHub Commit & Push'
 description: 'Push changes made by actions right back into the current repository.'
 author: "actions-js"
 inputs:
+  # Input not required from the user
   github_token:
-    description: 'Token for the repo. Can be passed in using $\{{ secrets.GITHUB_TOKEN }}'
-    required: true
+    description: The token used to make requests to the GitHub API. It's NOT used to make commits and should not be changed.
+    required: false
+    default: ${{ github.token }}
   author_email:
     description: 'Email used to configure user.email in `git config`.'
     default: 'github-actions[bot]@users.noreply.github.com'
-    required: false  
+    required: false
   author_name:
     description: 'Name used to configure user.name in `git config`.'
     default: 'github-actions[bot]'
-    required: false  
+    required: false
   coauthor_email:
     description: 'Email used to make a co-authored commit.'
     required: false
@@ -36,6 +38,9 @@ inputs:
   force:
     description: 'Determines if force push is used'
     required: false
+  rebase:
+    description: 'Determines if rebase should be performed before push'
+    required: false
   tags:
     description: 'Determines if --tags is used'
     required: false
@@ -44,8 +49,10 @@ inputs:
     required: false
     default: '.'
 runs:
-  using: 'node12'
-  main: 'start.js'
+  using: "composite"
+  steps:
+    - run: ${{ github.action_path }}/start.sh
+      shell: bash
 branding:
   icon: 'arrow-up-circle'
   color: 'green'

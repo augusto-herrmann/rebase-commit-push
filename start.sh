@@ -10,6 +10,7 @@ INPUT_COAUTHOR_NAME=${INPUT_COAUTHOR_NAME:-''}
 INPUT_MESSAGE=${INPUT_MESSAGE:-"chore: autopublish ${timestamp}"}
 INPUT_BRANCH=${INPUT_BRANCH:-master}
 INPUT_FORCE=${INPUT_FORCE:-false}
+INPUT_REBASE=${INPUT_REBASE:-false}
 INPUT_TAGS=${INPUT_TAGS:-false}
 INPUT_EMPTY=${INPUT_EMPTY:-false}
 INPUT_DIRECTORY=${INPUT_DIRECTORY:-'.'}
@@ -45,11 +46,15 @@ git add -A
 
 if [ -n "${INPUT_COAUTHOR_EMAIL}" ] && [ -n "${INPUT_COAUTHOR_NAME}" ]; then
     git commit -m "${INPUT_MESSAGE}
-    
+
 
 Co-authored-by: ${INPUT_COAUTHOR_NAME} <${INPUT_COAUTHOR_EMAIL}>" $_EMPTY || exit 0
 else
     git commit -m "{$INPUT_MESSAGE}" $_EMPTY || exit 0
+fi
+
+if ${INPUT_REBASE}; then
+    git fetch "${remote_repo}" "${INPUT_BRANCH}" && git rebase "${remote_repo}"/"${INPUT_BRANCH}";
 fi
 
 git push "${remote_repo}" HEAD:"${INPUT_BRANCH}" --follow-tags $_FORCE_OPTION $_TAGS;
