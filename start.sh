@@ -41,6 +41,7 @@ remote_repo="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${REPOSITO
 git config http.sslVerify false
 git config --local user.email "${INPUT_AUTHOR_EMAIL}"
 git config --local user.name "${INPUT_AUTHOR_NAME}"
+git remote add origin "${remote_repo}"
 
 echo 'Staging files'
 git add -A
@@ -58,9 +59,9 @@ echo 'Comitted'
 
 if ${INPUT_REBASE}; then
     echo 'Rebasing'
-    git fetch "${remote_repo}" "${INPUT_BRANCH}" && git rebase "${remote_repo}"/"${INPUT_BRANCH}";
+    git fetch origin "${INPUT_BRANCH}" && git rebase origin/"${INPUT_BRANCH}";
     echo 'Rebased'
 fi
 
-git push "${remote_repo}" HEAD:"${INPUT_BRANCH}" --follow-tags $_FORCE_OPTION $_TAGS;
+git push origin HEAD:"${INPUT_BRANCH}" --follow-tags $_FORCE_OPTION $_TAGS;
 echo 'Pushed'
