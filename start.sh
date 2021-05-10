@@ -42,8 +42,10 @@ git config http.sslVerify false
 git config --local user.email "${INPUT_AUTHOR_EMAIL}"
 git config --local user.name "${INPUT_AUTHOR_NAME}"
 
+echo 'Staging files'
 git add -A
 
+echo 'Committing'
 if [ -n "${INPUT_COAUTHOR_EMAIL}" ] && [ -n "${INPUT_COAUTHOR_NAME}" ]; then
     git commit -m "${INPUT_MESSAGE}
 
@@ -52,9 +54,13 @@ Co-authored-by: ${INPUT_COAUTHOR_NAME} <${INPUT_COAUTHOR_EMAIL}>" $_EMPTY || exi
 else
     git commit -m "{$INPUT_MESSAGE}" $_EMPTY || exit 0
 fi
+echo 'Comitted'
 
 if ${INPUT_REBASE}; then
+    echo 'Rebasing'
     git fetch "${remote_repo}" "${INPUT_BRANCH}" && git rebase "${remote_repo}"/"${INPUT_BRANCH}";
+    echo 'Rebased'
 fi
 
 git push "${remote_repo}" HEAD:"${INPUT_BRANCH}" --follow-tags $_FORCE_OPTION $_TAGS;
+echo 'Pushed'
