@@ -50,7 +50,7 @@ if [ -n "${INPUT_COAUTHOR_EMAIL}" ] && [ -n "${INPUT_COAUTHOR_NAME}" ]; then
 
 Co-authored-by: ${INPUT_COAUTHOR_NAME} <${INPUT_COAUTHOR_EMAIL}>" $_EMPTY || true
 else
-    git commit -m "{$INPUT_MESSAGE}" $_EMPTY || true
+    git commit -m "${INPUT_MESSAGE}" $_EMPTY || true
 fi
 echo 'Comitted'
 
